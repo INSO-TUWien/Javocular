@@ -7,3 +7,6 @@
 
 # Christoph Kastner-Masilko
 # kastner-masilko.christoph@student.htlwrn.ac.at
+
+# Manuel Macheiner
+# Macheiner.Manuel@student.htlwrn.ac.at
