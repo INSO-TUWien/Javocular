@@ -2,6 +2,7 @@ package org.openjfx.sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.util.*;
@@ -9,7 +10,9 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import com.arangodb.*;
 import com.arangodb.entity.BaseDocument;
+import com.arangodb.entity.CollectionEntity;
 import com.arangodb.util.RawJson;
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
 
 import java.io.IOException;
 
@@ -23,11 +26,17 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        Group g = new Group();
         try
         {
             String query = "FOR t IN commits RETURN t.signature";
-            ArangoCursor cursor = arangodb.db("binocular-Binocular").query(query, null, null, BaseDocument.class);
-            cursor.forEachRemaining(aDocument -> {System.out.println("Key: " + aDocument.getKey());});
+            ArangoCursor<BaseDocument> cursor = arangodb.db("binocular-Binocular").query(query, BaseDocument.class, null, null);
+            List<BaseDocument> rem = cursor.asListRemaining();
+            for(int i = 0; i < rem.size(); i++)
+            {
+                rem.get(i).getAttribute("signature");
+            }
+            g = new Group(rem);
         }
         catch(Exception e)
         {
