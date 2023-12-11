@@ -1,1 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: rgb(13,8,7);
+}
+
+#main-text {
+  color: rgb(241, 236, 235);
+}
+
+/* brown-ish
+:root[data-theme="light"] {
+  --text: rgb(21, 16, 15);
+  --background: rgb(248, 243, 242);
+  --primary: rgb(87, 45, 41);
+  --secondary: rgb(207, 134, 125);
+  --accent: rgb(170, 61, 49);
+}
+:root[data-theme="dark"] {
+  --text: rgb(241, 236, 235);
+  --background: rgb(13, 8, 7);
+  --primary: rgb(214, 172, 167);
+  --secondary: rgb(129, 57, 48);
+  --accent: rgb(206, 99, 86);
+}
+*/
+
+/* winered-pink
+:root[data-theme="light"] {
+  --text: rgb(16, 17, 25);
+  --background: rgb(233, 234, 241);
+  --primary: rgb(56, 62, 87);
+  --secondary: rgb(193, 159, 188);
+  --accent: rgb(128, 82, 104);
+}
+:root[data-theme="dark"] {
+  --text: rgb(230, 231, 239);
+  --background: rgb(13, 14, 21);
+  --primary: rgb(167, 174, 199);
+  --secondary: rgb(96, 61, 91);
+  --accent: rgb(174, 128, 150);
+}
+ */
+
+/* green-ish
+:root[data-theme="light"] {
+  --text: rgb(16, 19, 12);
+  --background: rgb(245, 247, 243);
+  --primary: rgb(68, 83, 55);
+  --secondary: rgb(157, 190, 173);
+  --accent: rgb(102, 153, 144);
+}
+:root[data-theme="dark"] {
+  --text: rgb(240, 243, 236);
+  --background: rgb(10, 12, 8);
+  --primary: rgb(185, 200, 172);
+  --secondary: rgb(65, 98, 81);
+  --accent: rgb(102, 153, 144);
+}
+ */
+
+/*
+--text: rgb(239, 242, 235);
+--background: rgb(10, 12, 8);
+--primary: rgb(184, 199, 171);
+--secondary: rgb(66, 98, 82);
+--accent: rgb(103, 153, 144);
+ */
+
+/* blue-ish
+:root[data-theme="light"] {
+  --text: rgb(13, 14, 18);
+  --background: rgb(238, 239, 246);
+  --primary: rgb(39, 50, 109);
+  --secondary: rgb(132, 146, 225);
+  --accent: rgb(29, 54, 195);
+}
+:root[data-theme="dark"] {
+  --text: rgb(238, 239, 243);
+  --background: rgb(8, 9, 16);
+  --primary: rgb(145, 155, 215);
+  --secondary: rgb(30, 44, 124);
+  --accent: rgb(60, 85, 226);
+}
+ */
