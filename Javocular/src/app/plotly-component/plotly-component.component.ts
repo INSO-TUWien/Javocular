@@ -9,8 +9,8 @@ import { PlotlyService } from '../plotly.service';
 export class PlotlyComponentComponent implements OnInit{
   constructor(private plot:PlotlyService) { }
   ngOnInit(): void {
-    let x:number[] = [1,2,3,4,5];
-    let y:number[] = [1,2,3,4,5];
-    this.plot.plotLine("Line Plot","plot",x,y);
+    let x:number[][] = [[43, 64, 32], [10, 15, 14], [5, 8, 10]];
+    let authors:string[] = ["Author 1", "Author 2", "Author 3"];
+    this.plot.plotCIMR("CIMR - Diagram","plot", x, authors);
   }
 }
