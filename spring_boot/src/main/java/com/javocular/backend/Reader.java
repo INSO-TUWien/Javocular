@@ -21,13 +21,13 @@ public class Reader{
         connector = connection;
     }
 
-    public List<String> QueryResult(String query) {
+    public ArangoCursor<BaseDocument> QueryResult(String query) {
 
         if(arangodb == null) return null;
         List<String> result = new ArrayList<>();
         ArangoCursor<BaseDocument> cursor = arangodb.db(connector).query(query, BaseDocument.class, null, null);
-        while(cursor.hasNext()) result.add(cursor.next().toString());
-        return result;
+        // while(cursor.hasNext()) result.add(cursor.next().toString());
+        return cursor;
     }
 
     public void reset(String connection)
