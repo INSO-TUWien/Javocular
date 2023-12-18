@@ -1,0 +1,27 @@
+{
+  "Author1": {
+    "Commits": 10,
+    "Issues": 5,
+    "MergeRequests": 2
+  },
+  "Author2": {
+    "Commits": 5,
+    "Issues": 2,
+    "MergeRequests": 1
+  },
+  "Author3": {
+    "Commits": 2,
+    "Issues": 1,
+    "MergeRequests": 0
+  },
+  "Author4": {
+    "Commits": 1,
+    "Issues": 0,
+    "MergeRequests": 0
+  },
+  "Author5": {
+    "Commits": 1,
+    "Issues": 0,
+    "MergeRequests": 0
+  }
+}
