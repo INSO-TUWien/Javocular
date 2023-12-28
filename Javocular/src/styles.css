@@ -1,10 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: rgb(13,8,7);
+  background-color: rgb(238, 239, 246);
 }
 
 #main-text {
-  color: rgb(241, 236, 235);
+  color: rgb(13, 14, 18);
+}
+
+#primary-color {
+  background-color: rgb(39, 50, 109);
+}
+
+#secondary.color {
+  background-color: rgb(132, 146, 225);
+}
+
+#accent {
+  background-color: rgb(29, 54, 195);
 }
 
 /* brown-ish
@@ -13,7 +25,7 @@ body {
   --background: rgb(248, 243, 242);
   --primary: rgb(87, 45, 41);
   --secondary: rgb(207, 134, 125);
-  --accent: rgb(170, 61, 49);
+  --accent: rgb(170, 61, 49);2
 }
 :root[data-theme="dark"] {
   --text: rgb(241, 236, 235);
@@ -56,14 +68,6 @@ body {
   --secondary: rgb(65, 98, 81);
   --accent: rgb(102, 153, 144);
 }
- */
-
-/*
---text: rgb(239, 242, 235);
---background: rgb(10, 12, 8);
---primary: rgb(184, 199, 171);
---secondary: rgb(66, 98, 82);
---accent: rgb(103, 153, 144);
  */
 
 /* blue-ish
