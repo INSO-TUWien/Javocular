@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { PlotlyComponentComponent} from "./plotly-component/plotly-component.component";
 import {HomeComponent} from "./home/home.component";
 import { HttpClientModule } from '@angular/common/http';
-import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -14,12 +13,11 @@ import {NgOptimizedImage} from "@angular/common";
     PlotlyComponentComponent,
     HomeComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        NgOptimizedImage
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

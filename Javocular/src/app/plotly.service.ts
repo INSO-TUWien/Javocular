@@ -9,55 +9,9 @@ declare let Plotly: any;
 export class PlotlyService {
   constructor(private dataService: JsonDataService) { }
 
-  plotLine(title: string, plotDiv: string, x:number[], y:number[]){
-    let trace = {
-      x: x,
-      y: y,
-      type: 'scatter'
-    };
-
-    let layout = {
-      title:title
-    };
-
-    Plotly.newPlot(plotDiv, [trace], layout);
-  }
-
-  plotCIMR(title: string, plotDiv: string, x:number[][], y:string[]) {
-    let traceCom = {
-      x: x[0],
-      y: y,
-      type: 'bar',
-      orientation: "h",
-      name: "commits"
-    };
-    let traceIss = {
-      x: x[1],
-      y: y,
-      type: 'bar',
-      orientation: "h",
-      name: "issues"
-    };
-    let traceMergR = {
-      x: x[2],
-      y: y,
-      type: 'bar',
-      orientation: "h",
-      name: "merge requests"
-    };
-
-    let layout = {
-      title: title,
-      barmode: "stack"
-    };
-
-    Plotly.newPlot(plotDiv, [traceCom, traceIss, traceMergR], layout);
-  }
-
-  plotCIMRJson(title: string, plotDiv: string, tables: string[], excAuthors: string[]) {
+  getAuthorNames() {
+    let authors: string[] = [];
     this.dataService.getAuthorsCIMR().subscribe(data => {
-      let authors: string[] = [];
-      let values: number[][] = [];
 
       console.log('Authors data:', data);
 
@@ -65,27 +19,45 @@ export class PlotlyService {
       for (let author in data) {
         if (data.hasOwnProperty(author)) {
           authors.push(author);
+        }
+      }
+    });
+    return authors;
+  }
+
+  plotCIMRJson(title: string, plotDiv: string, tables: string[], excAuthors: string[]) {
+    let authors: string[] = this.getAuthorNames();
+    let filteredAuthors: string[] = [];
+
+    this.dataService.getAuthorsCIMR().subscribe(data => {
+      let values: number[][] = [];
+
+      // Assuming data is an object with properties corresponding to authors
+      for (let author in data) {
+        if (data.hasOwnProperty(author) && !excAuthors.includes(author)) {
           values.push(Object.values(data[author]));
+          filteredAuthors.push(author.toString());
+          console.log(author);
         }
       }
 
       let traceCom = {
         x: values.map(authorValues => authorValues[0]),
-        y: authors,
+        y: filteredAuthors,
         type: 'bar',
         orientation: "h",
         name: "commits"
       };
       let traceIss = {
         x: values.map(authorValues => authorValues[1]),
-        y: authors,
+        y: filteredAuthors,
         type: 'bar',
         orientation: "h",
         name: "issues"
       };
       let traceMergR = {
         x: values.map(authorValues => authorValues[2]),
-        y: authors,
+        y: filteredAuthors,
         type: 'bar',
         orientation: "h",
         name: "merge requests"

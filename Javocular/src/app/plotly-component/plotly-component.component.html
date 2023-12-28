@@ -1,2 +1,57 @@
-<p>plotly-component works!</p>
-<div id="plot"></div>
+<div class="row" style="margin-top: 10px">
+  <div class="col-lg-4">
+    <div id="buttons-container" class="row">
+      <div id="filter-container" class="col-lg-5">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" (click)="changeDisplayFilter('filterContent')">
+          Filter
+        </button>
+        <div id="filterContent" style="display: none; font-weight: bold;" class="border border-secondary">
+          <div *ngFor="let author of authors; let i = index" class="form-check">
+            <input
+              class="form-check-input border border-secondary"
+              type="checkbox"
+              [value]="author"
+              [id]="'defaultCheck' + i"
+              [checked]="checkedAuthors[i]"
+              (change)="toggleCheckbox(i)"
+            />
+            <label class="form-check-label" [for]="'defaultCheck' + i">
+              {{ author }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div id="grouping-container" class="col-lg-5">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" (click)="changeDisplayFilter('groupingContent')">
+          Grouping
+        </button>
+        <div id="groupingContent" style="display: none">
+          <div class="btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio0" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary" for="btnradio0">None</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="btnradio1">Commits</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="btnradio2">Issues</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="btnradio3">Merge Requests</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <button class="btn btn-secondary" type="button" style="width: 25%; margin-top: 20px; margin-left: 22px;" (click)="plotCIMRJson([], getUncheckedAuthors())">
+          Apply Changes
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div id="plot" style="height: 600px;"></div>
+  </div>
+</div>
