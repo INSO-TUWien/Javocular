@@ -7,15 +7,15 @@ body {
   color: rgb(13, 14, 18);
 }
 
-#primary-color {
+.primary-color {
   background-color: rgb(39, 50, 109);
 }
 
-#secondary.color {
+.secondary-color {
   background-color: rgb(132, 146, 225);
 }
 
-#accent {
+.accent {
   background-color: rgb(29, 54, 195);
 }
 
@@ -70,7 +70,7 @@ body {
 }
  */
 
-/* blue-ish
+blue-ish
 :root[data-theme="light"] {
   --text: rgb(13, 14, 18);
   --background: rgb(238, 239, 246);
@@ -85,4 +85,3 @@ body {
   --secondary: rgb(30, 44, 124);
   --accent: rgb(60, 85, 226);
 }
- */
