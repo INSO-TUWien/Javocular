@@ -63,12 +63,24 @@ export class PlotlyService {
         name: "merge requests"
       };
 
+      let traces: any[] = [];
+
+      if (tables.includes("commits")) {
+        traces.push(traceCom);
+      }
+      if (tables.includes("issues")) {
+        traces.push(traceIss);
+      }
+      if (tables.includes("mergeRequests")) {
+        traces.push(traceMergR);
+      }
+
       let layout = {
         title: title,
         barmode: "stack"
       };
 
-      Plotly.newPlot(plotDiv, [traceCom, traceIss, traceMergR], layout);
+      Plotly.newPlot(plotDiv, traces, layout);
     });
   }
 
