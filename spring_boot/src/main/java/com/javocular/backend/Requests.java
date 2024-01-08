@@ -7,5 +7,5 @@ public interface Requests {
 
 
 
-    public HashMap<String, int[]> CIMRDiagram(String[] tables, List<String> exlAuths);
+    public JSONObjectList CIMRDiagram(String[] tables, List<String> exlAuths);
 }
