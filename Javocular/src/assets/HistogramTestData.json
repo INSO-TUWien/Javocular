@@ -8,19 +8,19 @@
   "mergeReqest2" : {
     "linesOfCodeAdded" : 20,
     "linesOfCodeDeleted" : 10,
-    "startDate" : "2019-01-02",
-    "endDate" : "2019-01-03"
+    "startDate" : "2019-02-02",
+    "endDate" : "2019-02-15"
   },
   "mergeReqest3" : {
     "linesOfCodeAdded" : 30,
     "linesOfCodeDeleted" : 15,
-    "startDate" : "2019-01-03",
-    "endDate" : "2019-01-04"
+    "startDate" : "2019-03-16",
+    "endDate" : "2019-04-01"
   },
   "mergeReqest4" : {
     "linesOfCodeAdded" : 40,
     "linesOfCodeDeleted" : 20,
-    "startDate" : "2020-01-04",
-    "endDate" : "2020-01-05"
+    "startDate" : "2019-05-04",
+    "endDate" : "2019-05-05"
   }
 }

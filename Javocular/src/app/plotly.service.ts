@@ -86,8 +86,58 @@ export class PlotlyService {
 
 
 
-  plotHistMR() {
+  plotHistMR(title: string, plotDiv: string) {
+    this.dataService.getHistogramData().subscribe(data => {
+      var mergeRequestNames = Object.keys(data);
 
+      var linesOfCodeAdded = mergeRequestNames.map(function (mr) { return data[mr]["linesOfCodeAdded"]; });
+      var linesOfCodeDeleted = mergeRequestNames.map(function (mr) { return data[mr]["linesOfCodeDeleted"]; });
+      var startDates = mergeRequestNames.map(function (mr) { return data[mr]["startDate"]; });
+      var endDates = mergeRequestNames.map(function (mr) { return data[mr]["endDate"]; });
+
+      var dateDiffs = startDates.map(function (start, index) {
+        var startDate = new Date(start);
+        var endDate = new Date(endDates[index]);
+        return Math.abs(endDate.getTime() - startDate.getTime()); // Difference is in milliseconds
+      });
+
+      var trace1 = {
+        x: endDates,
+        y: linesOfCodeAdded,
+        type: 'bar',
+        name: 'Request End Date',
+        width: 86400000 * 9
+      };
+
+      var trace2 = {
+        x: dateDiffs,
+        y: linesOfCodeAdded,
+        type: 'bar',
+        name: 'Date Difference from Start',
+        base: startDates,
+        orientation: 'h'
+      };
+
+
+      var layout = {
+        title: 'Lines of Code Added vs. Request Dates',
+        xaxis: {
+          title: 'Date',
+          type: 'date',
+          showgrid: true,
+          showline: true
+        },
+        yaxis: {
+          title: 'Lines of Code Added',
+          showgrid: true,
+          showline: true
+        },
+        dragmode: 'pan', // Enable pan/drag functionality
+      };
+
+      // Create the plot
+      Plotly.newPlot(plotDiv, [trace1, trace2], layout);
+    });
   }
 
 }
