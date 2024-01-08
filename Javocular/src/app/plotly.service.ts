@@ -84,8 +84,6 @@ export class PlotlyService {
     });
   }
 
-
-
   plotHistMR() {
 
   }
