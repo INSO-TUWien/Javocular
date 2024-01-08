@@ -11,12 +11,13 @@ public class RequestImplement implements Requests{
     private final Reader read = new Reader();
 
     @Override
-    public HashMap<String, Integer[]> CIMRDiagram(String[] tables, List<String> exlAuths) {
+    public HashMap<String, int[]> CIMRDiagram(String[] tables, List<String> exlAuths) {
 
         //set database connection to binocular database
         read.reset("binocular-Binocular");
 
-        HashMap<String, Integer[]> cimrs = new HashMap<>();
+        // each author is its own entry, and their contributions in each table is a dedicated entry in the int[]
+        HashMap<String, int[]> cimrs = new HashMap<>();
 
         for(var table : tables) {
 
@@ -32,7 +33,7 @@ public class RequestImplement implements Requests{
                         author = ((BaseDocument) cursor.next().getAttribute("assignees")).getAttribute("login").toString();
                         if (!exlAuths.contains(author)) {
                             if(!cimrs.containsKey(author)) {
-                                cimrs.put(author, new Integer[3]);
+                                cimrs.put(author, new int[3]);
                             }
                             cimrs.get(author)[2]++;
                         }
@@ -42,7 +43,7 @@ public class RequestImplement implements Requests{
                         author = ((BaseDocument) cursor.next().getAttribute("assignees")).getAttribute("login").toString();
                         if (!exlAuths.contains(author)) {
                             if(!cimrs.containsKey(author)) {
-                                cimrs.put(author, new Integer[3]);
+                                cimrs.put(author, new int[3]);
                             }
                             cimrs.get(author)[1]++;
                         }
@@ -52,7 +53,7 @@ public class RequestImplement implements Requests{
                         author = cursor.next().getAttribute("signature").toString();
                         if (!exlAuths.contains(author)) {
                             if(!cimrs.containsKey(author)) {
-                                cimrs.put(author, new Integer[3]);
+                                cimrs.put(author, new int[3]);
                             }
                             cimrs.get(author)[0]++;
                         }

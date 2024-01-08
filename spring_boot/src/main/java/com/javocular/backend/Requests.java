@@ -5,5 +5,7 @@ import java.util.List;
 
 public interface Requests {
 
-    public HashMap<String, Integer[]> CIMRDiagram(String[] tables, List<String> exlAuths);
+
+
+    public HashMap<String, int[]> CIMRDiagram(String[] tables, List<String> exlAuths);
 }
