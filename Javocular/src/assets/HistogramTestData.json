@@ -1,0 +1,26 @@
+{
+  "mergeReqest1" : {
+    "linesOfCodeAdded" : 10,
+    "linesOfCodeDeleted" : 5,
+    "startDate" : "2019-01-01",
+    "endDate" : "2019-01-02"
+  },
+  "mergeReqest2" : {
+    "linesOfCodeAdded" : 20,
+    "linesOfCodeDeleted" : 10,
+    "startDate" : "2019-01-02",
+    "endDate" : "2019-01-03"
+  },
+  "mergeReqest3" : {
+    "linesOfCodeAdded" : 30,
+    "linesOfCodeDeleted" : 15,
+    "startDate" : "2019-01-03",
+    "endDate" : "2019-01-04"
+  },
+  "mergeReqest4" : {
+    "linesOfCodeAdded" : 40,
+    "linesOfCodeDeleted" : 20,
+    "startDate" : "2020-01-04",
+    "endDate" : "2020-01-05"
+  }
+}
