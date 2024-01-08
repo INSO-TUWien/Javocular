@@ -84,6 +84,30 @@ export class PlotlyService {
     });
   }
 
+  groupCIMR(title: string, table: string, plotDiv: string) {
+    let authors = this.getAuthorNames();
+
+    this.dataService.getAuthorsCIMR().subscribe(data => {
+      let count = authors.filter(author => data[author][table] > 0).length;
+
+      let trace = {
+        x: [count],
+        y: [table],
+        type: 'bar',
+        orientation: "h",
+        name: `${table} group`
+      };
+
+      let layout = {
+        title: title,
+        barmode: "stack"
+      };
+
+      Plotly.newPlot(plotDiv, [trace], layout);
+    });
+  }
+
+
   plotHistMR() {
 
   }

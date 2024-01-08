@@ -94,7 +94,14 @@ export class BarcharCIMRComponent implements OnInit{
     // remove text and border that is displayed when a diagram is not generated yet
     document.getElementById("noDiagGen")!.style.display = "none";
     document.getElementById("plot")!.style.borderStyle = "none";
+    let radioNone = <HTMLInputElement> document.getElementById("btnradioNone")!;
+    radioNone.checked = true;
 
     this.plot.plotCIMRJson("CIMR - Diagram","plot", tables, excAuthors);
   }
+
+  groupCIMR(table: string) {
+    let title = "CIMR - " + table + " Grouping";
+    this.plot.groupCIMR(title, table, "plot");
+}
 }
