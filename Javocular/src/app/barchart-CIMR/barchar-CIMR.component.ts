@@ -10,6 +10,7 @@ export class BarcharCIMRComponent implements OnInit{
   constructor(private plot:PlotlyService) { }
   public authors!: string[];
   public checkedAuthors: boolean[] = [];
+  searchText: string = '';
   ngOnInit(): void {
     // let x:number[][] = [[43, 64, 32], [10, 15, 14], [5, 8, 10]];
     // let authors:string[] = ["Author 1", "Author 2", "Author 3"];
@@ -23,6 +24,11 @@ export class BarcharCIMRComponent implements OnInit{
 
   toggleCheckbox(index: number) {
     this.checkedAuthors[index] = !this.checkedAuthors[index];
+  }
+
+  get filteredAuthors(): string[] {
+    // Filter authors based on the search text
+    return this.authors.filter(author => author.toLowerCase().includes(this.searchText.toLowerCase()));
   }
 
   getUncheckedAuthors() {
@@ -88,7 +94,14 @@ export class BarcharCIMRComponent implements OnInit{
     // remove text and border that is displayed when a diagram is not generated yet
     document.getElementById("noDiagGen")!.style.display = "none";
     document.getElementById("plot")!.style.borderStyle = "none";
+    let radioNone = <HTMLInputElement> document.getElementById("btnradioNone")!;
+    radioNone.checked = true;
 
     this.plot.plotCIMRJson("CIMR - Diagram","plot", tables, excAuthors);
   }
+
+  groupCIMR(table: string) {
+    let title = "CIMR - " + table + " Grouping";
+    this.plot.groupCIMR(title, table, "plot");
+}
 }

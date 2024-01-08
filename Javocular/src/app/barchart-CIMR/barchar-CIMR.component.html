@@ -6,6 +6,7 @@
           Filter
         </button>
         <div id="filterContent" style="display: none; font-weight: bold;" class="border border-secondary">
+          <input type="text" class="form-control" placeholder="Search Authors" [(ngModel)]="searchText" />
           <div class="form-check">
             <input
               class="form-check-input border border-secondary"
@@ -39,18 +40,20 @@
               Merge Requests
             </label>
           </div>
-          <div *ngFor="let author of authors; let i = index" class="form-check">
-            <input
-              class="form-check-input border border-secondary authorCheckbox"
-              type="checkbox"
-              [value]="author"
-              [id]="'authorCheck' + i"
-              [checked]="checkedAuthors[i]"
-              (change)="toggleCheckbox(i)"
-            />
-            <label class="form-check-label" [for]="'authorCheck' + i">
-              {{ author }}
-            </label>
+          <div style="max-height: 150px; overflow-y: auto;">
+            <div *ngFor="let author of filteredAuthors; let i = index" class="form-check">
+              <input
+                class="form-check-input border border-secondary authorCheckbox"
+                type="checkbox"
+                [value]="author"
+                [id]="'authorCheck' + i"
+                [checked]="checkedAuthors[i]"
+                (change)="toggleCheckbox(i)"
+              />
+              <label class="form-check-label" [for]="'authorCheck' + i">
+                {{ author }}
+              </label>
+            </div>
           </div>
           <button class="btn btn-secondary" type="button" style="width: 48%; height: 35px; font-weight: bold" (click)="selectAll()">
             Select all
@@ -67,17 +70,17 @@
         </button>
         <div id="groupingContent" style="display: none">
           <div class="btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio0" autocomplete="off" checked>
-            <label class="btn btn-outline-secondary" for="btnradio0">None</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradioNone" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary" for="btnradioNone">None</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="btnradio1">Commits</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradioCom" autocomplete="off" (click)="groupCIMR('Commits')">
+            <label class="btn btn-outline-secondary" for="btnradioCom">Commits</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="btnradio2">Issues</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradioIss" autocomplete="off" (click)="groupCIMR('Issues')">
+            <label class="btn btn-outline-secondary" for="btnradioIss">Issues</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="btnradio3">Merge Requests</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradioMR" autocomplete="off" (click)="groupCIMR('MergeRequests')">
+            <label class="btn btn-outline-secondary" for="btnradioMR">Merge Requests</label>
           </div>
         </div>
       </div>
