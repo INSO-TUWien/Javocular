@@ -13,6 +13,7 @@ public class RequestImplement implements Requests{
     @Override
     public HashMap<String, Integer[]> CIMRDiagram(String[] tables, List<String> exlAuths) {
 
+        //set database connection to binocular database
         read.reset("binocular-Binocular");
 
         HashMap<String, Integer[]> cimrs = new HashMap<>();
