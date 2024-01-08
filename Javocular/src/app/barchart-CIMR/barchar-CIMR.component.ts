@@ -3,10 +3,10 @@ import { PlotlyService } from '../plotly.service';
 
 @Component({
   selector: 'app-plotly-component',
-  templateUrl: './plotly-component.component.html',
-  styleUrls: ['./plotly-component.component.css']
+  templateUrl: './barchar-CIMR.component.html',
+  styleUrls: ['./barchar-CIMR.component.css']
 })
-export class PlotlyComponentComponent implements OnInit{
+export class BarcharCIMRComponent implements OnInit{
   constructor(private plot:PlotlyService) { }
   public authors!: string[];
   public checkedAuthors: boolean[] = [];

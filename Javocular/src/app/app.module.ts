@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlotlyComponentComponent} from "./plotly-component/plotly-component.component";
+import { BarcharCIMRComponent} from "./barchart-CIMR/barchar-CIMR.component";
 import {HomeComponent} from "./home/home.component";
 import { HttpClientModule } from '@angular/common/http';
 import {NgOptimizedImage} from "@angular/common";
@@ -11,7 +11,7 @@ import {NgOptimizedImage} from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
-    PlotlyComponentComponent,
+    BarcharCIMRComponent,
     HomeComponent
   ],
   imports: [

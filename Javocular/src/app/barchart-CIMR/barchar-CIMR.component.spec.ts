@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlotlyComponentComponent } from './plotly-component.component';
+import { BarcharCIMRComponent } from './barchar-CIMR.component';
 
 describe('PlotlyComponentComponent', () => {
-  let component: PlotlyComponentComponent;
-  let fixture: ComponentFixture<PlotlyComponentComponent>;
+  let component: BarcharCIMRComponent;
+  let fixture: ComponentFixture<BarcharCIMRComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlotlyComponentComponent ]
+      declarations: [ BarcharCIMRComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PlotlyComponentComponent);
+    fixture = TestBed.createComponent(BarcharCIMRComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
