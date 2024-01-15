@@ -2,6 +2,7 @@ package com.javocular.backend;
 
 import com.arangodb.ArangoCursor;
 import com.arangodb.entity.BaseDocument;
+import com.javocular.backend.models.Commit;
 
 import java.util.*;
 import java.util.HashMap;
@@ -21,9 +22,7 @@ public class RequestImplement implements Requests{
 
         for(var table : tables) {
 
-            ArangoCursor<BaseDocument> cursor = read.QueryResult("FOR t IN " + table + " RETURN t");
-
-            String att = ("mergeRequests".equals(table) || "issues".equals(table)) ? "assignees" : "signature";
+            ArangoCursor<Commit> cursor = read.QueryResult("FOR t IN " + table + " RETURN t");
 
             while(cursor.hasNext()) {
                 String author = "";
@@ -44,19 +43,26 @@ public class RequestImplement implements Requests{
                             cimrs.get(author)[2]++;
                         }
                         break;
-
+                    *//*
                     case "issues":
-                        author = ((BaseDocument) cursor.next().getAttribute("assignees")).getAttribute("login").toString();
+                        var between = (LinkedHashMap)cursor.next().getAttribute("assignee");
+
+                        if (between == null) break;
+
+                        author = between.get("login").toString();
+
                         if (!exlAuths.contains(author)) {
-                            if(!cimrs.containsKey(author)) {
-                                cimrs.put(author, new int[3]);
+                            if(cimrs.find(author) == null) {
+                                cimrs.add(author, tables);
                             }
-                            cimrs.get(author)[1]++;
+                            int value = (int) cimrs.get(author).getObjectContent().get("issues");
+                            cimrs.get(author).getObjectContent().replace("issues", value, value + 1);
+
                         }
                         break;
-                    */
+                        */
                     case "commits":
-                        author = cursor.next().getAttribute("signature").toString();
+                        author = cursor.next().signature;
 
                         if (!exlAuths.contains(author)) {
                             if(cimrs.find(author) == null) {

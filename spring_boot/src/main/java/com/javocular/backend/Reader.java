@@ -4,6 +4,8 @@ import com.arangodb.entity.BaseDocument;
 import com.arangodb.*;
 import com.arangodb.util.RawJson;
 import com.fasterxml.jackson.databind.ser.Serializers;
+import com.javocular.backend.models.Commit;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -21,11 +23,11 @@ public class Reader{
         connector = connection;
     }
 
-    public ArangoCursor<BaseDocument> QueryResult(String query) {
+    public ArangoCursor<Commit> QueryResult(String query) {
 
         if(arangodb == null) return null;
         List<String> result = new ArrayList<>();
-        ArangoCursor<BaseDocument> cursor = arangodb.db(connector).query(query, BaseDocument.class, null, null);
+        ArangoCursor<Commit> cursor = arangodb.db(connector).query(query, Commit.class, null, null);
         // while(cursor.hasNext()) result.add(cursor.next().toString());
         return cursor;
     }
