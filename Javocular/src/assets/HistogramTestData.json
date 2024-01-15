@@ -6,7 +6,7 @@
     "endDate" : "2019-01-02"
   },
   "mergeReqest2" : {
-    "linesOfCodeAdded" : 200,
+    "linesOfCodeAdded" : 20,
     "linesOfCodeDeleted" : 10,
     "startDate" : "2019-02-02",
     "endDate" : "2019-02-15"
@@ -22,5 +22,23 @@
     "linesOfCodeDeleted" : 20,
     "startDate" : "2019-05-04",
     "endDate" : "2019-05-05"
+  },
+  "mergeReqest5" : {
+    "linesOfCodeAdded" : 50,
+    "linesOfCodeDeleted" : 25,
+    "startDate" : "2019-06-06",
+    "endDate" : "2019-06-07"
+  },
+  "mergeReqest6" : {
+    "linesOfCodeAdded" : 60,
+    "linesOfCodeDeleted" : 30,
+    "startDate" : "2019-07-08",
+    "endDate" : "2019-07-09"
+  },
+  "mergeReqest7" : {
+    "linesOfCodeAdded" : 70,
+    "linesOfCodeDeleted" : 35,
+    "startDate" : "2019-08-10",
+    "endDate" : "2019-08-11"
   }
 }
