@@ -126,6 +126,26 @@ export class PlotlyService {
       var numberOfBars = mergeRequestNames.length;
       var barColors : string[] = this.getBarColors(numberOfBars);
 
+      var maxVal = linesOfCodeAdded.reduce((a, b) => Math.max(a, b)) + 50;
+
+      var layout = {
+        title: 'Lines of Code Added vs. Request Dates',
+        xaxis: {
+          title: 'Date',
+          type: 'date',
+          showgrid: true,
+          showline: true
+        },
+        yaxis: {
+          title: 'Lines of Code Added',
+          showgrid: true,
+          rangemode: 'fixed',
+          range: [0, maxVal],
+          showline: true
+        },
+        dragmode: 'pan', // Enable pan/drag functionality
+      };
+
       var trace1 = {
         x: endDates,
         y: linesOfCodeAdded,
@@ -145,7 +165,7 @@ export class PlotlyService {
         name: 'Date Difference from Start',
         base: startDates,
         orientation: 'h',
-        width: 2,
+        width: maxVal * 0.075,
         offset: 1,
         marker: {
           color: barColors
@@ -154,21 +174,6 @@ export class PlotlyService {
 
       data = [trace1, trace2];
 
-      var layout = {
-        title: 'Lines of Code Added vs. Request Dates',
-        xaxis: {
-          title: 'Date',
-          type: 'date',
-          showgrid: true,
-          showline: true
-        },
-        yaxis: {
-          title: 'Lines of Code Added',
-          showgrid: true,
-          showline: true
-        },
-        dragmode: 'pan', // Enable pan/drag functionality
-      };
 
       // Create the plot
       Plotly.newPlot(plotDiv, data, layout);
