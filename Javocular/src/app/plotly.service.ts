@@ -128,7 +128,8 @@ export class PlotlyService {
         y: linesOfCodeAdded,
         type: 'bar',
         name: 'Request End Date',
-        width: 86400000 * 9
+        width: 86400000 * 9,
+        bargap: 0
       };
 
       var trace2 = {
@@ -137,9 +138,11 @@ export class PlotlyService {
         type: 'bar',
         name: 'Date Difference from Start',
         base: startDates,
-        orientation: 'h'
+        orientation: 'h',
+        width: 10
       };
 
+      data = [trace1, trace2];
 
       var layout = {
         title: 'Lines of Code Added vs. Request Dates',
@@ -158,7 +161,7 @@ export class PlotlyService {
       };
 
       // Create the plot
-      Plotly.newPlot(plotDiv, [trace1, trace2], layout);
+      Plotly.newPlot(plotDiv, data, layout);
     });
   }
 
