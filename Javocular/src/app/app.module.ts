@@ -15,13 +15,13 @@ import {FormsModule} from "@angular/forms";
     BarcharCIMRComponent,
     HomeComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgOptimizedImage,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgOptimizedImage,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
