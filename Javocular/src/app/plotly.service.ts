@@ -157,7 +157,7 @@ export class PlotlyService {
         marker: {
           color: barColors
         },
-        showLegend: false
+        showlegend: false
       };
 
       var trace2 = {
@@ -170,8 +170,12 @@ export class PlotlyService {
         width: maxVal * 0.075,
         offset: maxVal * 0.01,
         marker: {
+          mode: 'markers',
           color: barColors
-        }
+        },
+        hoverinfo: '%{hovertemplate}',
+        hovertemplate: mergeRequestNames.map(name => `Merge Request: ${name}`),
+        showlegend: false
       };
 
       data = [trace1, trace2];

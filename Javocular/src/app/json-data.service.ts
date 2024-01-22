@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JsonDataService {
-  private jsonUrl = 'assets/BarChartTestData.json'; // adjust the path based on your project structure
+  private jsonUrlCIMR = 'assets/BarChartTestData.json'; // adjust the path based on your project structure
   private histogramJsonUrl = 'assets/HistogramTestData.json'; // adjust the path based on your project structure
   constructor(private http: HttpClient) {}
 
   getAuthorsCIMR(): Observable<any> {
-    return this.http.get<any>(this.jsonUrl);
+    return this.http.get<any>(this.jsonUrlCIMR);
   }
   getHistogramData(): Observable<any> {
     return this.http.get<any>(this.histogramJsonUrl);
