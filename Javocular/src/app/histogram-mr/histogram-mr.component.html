@@ -5,6 +5,30 @@
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" (click)="changeDisplayFilter('filterContent')">
           Filter
         </button>
+        <div id="filterContent" style="display: none; font-weight: bold;" class="border border-secondary">
+          <input type="text" class="form-control" placeholder="Search for Merge Requests" [(ngModel)]="searchText" />
+          <div style="max-height: 150px; overflow-y: auto;">
+            <div *ngFor="let mr of filteredMerges; let i = index" class="form-check">
+              <input
+                class="form-check-input border border-secondary authorCheckbox"
+                type="checkbox"
+                [value]="mr"
+                [id]="'authorCheck' + i"
+                [checked]="checkedMerges[i]"
+                (change)="toggleCheckbox(i)"
+              />
+              <label class="form-check-label" [for]="'authorCheck' + i">
+                {{ mr }}
+              </label>
+            </div>
+          </div>
+          <button class="btn btn-secondary" type="button" style="width: 48%; height: 35px; font-weight: bold" (click)="selectAll()">
+            Select all
+          </button>
+          <button class="btn btn-secondary" type="button" style="width: 50%; height: 35px; font-weight: bold; float:right;" (click)="unselectAll()">
+            Unselect all
+          </button>
+        </div>
       </div>
       <div id="grouping-container" class="col-lg-5">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" (click)="changeDisplayFilter('groupingContent')">
@@ -12,7 +36,7 @@
         </button>
         <div id="groupingContent" style="display: none">
           <div class="btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradioNone" autocomplete="off" (click)="plotHistogramCMIRJson()" checked>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradioNone" autocomplete="off" (click)="plotHistogramCMIRJson(getUncheckedMerges())" checked>
             <label class="btn btn-outline-secondary" for="btnradioNone">None</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradioCom" autocomplete="off">
@@ -29,7 +53,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <button class="btn btn-secondary" type="button" style="width: 25%; margin-top: 20px; margin-left: 22px;" (click)="plotHistogramCMIRJson()">
+        <button class="btn btn-secondary" type="button" style="width: 25%; margin-top: 20px; margin-left: 22px;" (click)="plotHistogramCMIRJson(getUncheckedMerges())">
           Apply Changes
         </button>
       </div>

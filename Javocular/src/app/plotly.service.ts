@@ -25,6 +25,16 @@ export class PlotlyService {
     return authors;
   }
 
+  getMergeRequestNames() {
+    let mergeRequests: string[] = [];
+    this.dataService.getHistogramData().subscribe(data => {
+      for (let mr in data) {
+        mergeRequests.push(mr);
+      }
+    });
+    return mergeRequests;
+  }
+
   plotCIMRJson(title: string, plotDiv: string, tables: string[], excAuthors: string[]) {
     let authors: string[] = this.getAuthorNames();
     let filteredAuthors: string[] = [];
@@ -108,14 +118,22 @@ export class PlotlyService {
   }
 
 
-  plotHistMR(title: string, plotDiv: string) {
+  plotHistMR(title: string, plotDiv: string, excMerges: string[]) {
     this.dataService.getHistogramData().subscribe(data => {
       var mergeRequestNames = Object.keys(data);
+      let filteredMerges: string[] = [];
 
-      var linesOfCodeAdded = mergeRequestNames.map(function (mr) { return data[mr]["linesOfCodeAdded"]; });
-      var linesOfCodeDeleted = mergeRequestNames.map(function (mr) { return data[mr]["linesOfCodeDeleted"]; });
-      var startDates = mergeRequestNames.map(function (mr) { return data[mr]["startDate"]; });
-      var endDates = mergeRequestNames.map(function (mr) { return data[mr]["endDate"]; });
+      for (let mr in data) {
+        if (data.hasOwnProperty(mr) && !excMerges.includes(mr)) {
+          filteredMerges.push(mr.toString());
+          console.log(mr);
+        }
+      }
+
+      var linesOfCodeAdded = filteredMerges.map(function (mr) { return data[mr]["linesOfCodeAdded"]; });
+      var linesOfCodeDeleted = filteredMerges.map(function (mr) { return data[mr]["linesOfCodeDeleted"]; });
+      var startDates = filteredMerges.map(function (mr) { return data[mr]["startDate"]; });
+      var endDates = filteredMerges.map(function (mr) { return data[mr]["endDate"]; });
 
       var dateDiffs = startDates.map(function (start, index) {
         var startDate = new Date(start);
@@ -123,10 +141,10 @@ export class PlotlyService {
         return Math.abs(endDate.getTime() - startDate.getTime()); // Difference is in milliseconds
       });
 
-      var numberOfBars = mergeRequestNames.length;
-      var barColors : string[] = this.getBarColors(numberOfBars);
+      var numberOfBars = filteredMerges.length;
+      var barColors: string[] = this.getBarColors(numberOfBars);
 
-      var maxVal = linesOfCodeAdded.reduce((a, b) => Math.max(a, b)) + 50;
+      var maxVal = linesOfCodeAdded.reduce((a, b) => Math.max(a, b), 0) + 50;
 
       var layout = {
         title: 'Lines of Code Added vs. Request Dates',
@@ -174,7 +192,7 @@ export class PlotlyService {
           color: barColors
         },
         hoverinfo: '%{hovertemplate}',
-        hovertemplate: mergeRequestNames.map(name => `Merge Request: ${name}`),
+        hovertemplate: filteredMerges.map(name => `Merge Request: ${name}`),
         showlegend: false
       };
 
