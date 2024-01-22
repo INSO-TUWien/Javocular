@@ -6,7 +6,7 @@
     "endDate" : "2019-01-02"
   },
   "mergeRequest2" : {
-    "linesOfCodeAdded" : 200,
+    "linesOfCodeAdded" : 20,
     "linesOfCodeDeleted" : 10,
     "startDate" : "2019-02-02",
     "endDate" : "2019-02-15"

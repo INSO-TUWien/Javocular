@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistogramCIMRComponent } from './histogram-cimr.component';
+import { HistogramMrComponent } from './histogram-mr.component';
 
-describe('HistogramCIMRComponent', () => {
-  let component: HistogramCIMRComponent;
-  let fixture: ComponentFixture<HistogramCIMRComponent>;
+describe('HistogramMrComponent', () => {
+  let component: HistogramMrComponent;
+  let fixture: ComponentFixture<HistogramMrComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HistogramCIMRComponent ]
+      declarations: [ HistogramMrComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HistogramCIMRComponent);
+    fixture = TestBed.createComponent(HistogramMrComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

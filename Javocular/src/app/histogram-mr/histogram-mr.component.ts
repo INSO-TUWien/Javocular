@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import {PlotlyService} from "../plotly.service";
 
 @Component({
-  selector: 'app-histogram-cimr',
-  templateUrl: './histogram-cimr.component.html',
-  styleUrls: ['./histogram-cimr.component.css']
+  selector: 'app-histogram-mr',
+  templateUrl: './histogram-mr.component.html',
+  styleUrls: ['./histogram-mr.component.css']
 })
-export class HistogramCIMRComponent {
+export class HistogramMrComponent {
   constructor(private plot:PlotlyService) {  }
 
   plotHistogramCMIRJson() {

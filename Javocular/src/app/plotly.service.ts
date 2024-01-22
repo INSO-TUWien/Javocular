@@ -144,6 +144,7 @@ export class PlotlyService {
           showline: true
         },
         dragmode: 'pan', // Enable pan/drag functionality
+        showLegend: false
       };
 
       var trace1 = {
@@ -155,7 +156,8 @@ export class PlotlyService {
         offset: -86400000 * 9,
         marker: {
           color: barColors
-        }
+        },
+        showLegend: false
       };
 
       var trace2 = {
@@ -166,7 +168,7 @@ export class PlotlyService {
         base: startDates,
         orientation: 'h',
         width: maxVal * 0.075,
-        offset: 1,
+        offset: maxVal * 0.01,
         marker: {
           color: barColors
         }
