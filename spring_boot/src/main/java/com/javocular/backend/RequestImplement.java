@@ -43,7 +43,7 @@ public class RequestImplement implements Requests{
                             cimrs.get(author)[2]++;
                         }
                         break;
-                    *//*
+                    */
                     case "issues":
                         var between = (LinkedHashMap)cursor.next().getAttribute("assignee");
 
@@ -60,7 +60,7 @@ public class RequestImplement implements Requests{
 
                         }
                         break;
-                        */
+
                     case "commits":
                         author = cursor.next().signature;
 
