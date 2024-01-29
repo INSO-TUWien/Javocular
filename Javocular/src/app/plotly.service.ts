@@ -167,7 +167,7 @@ export class PlotlyService {
 
       var trace1 = {
         x: endDates,
-        y: linesOfCodeAdded,
+        y: linesOfCodeAdded.map((value, index) => value + linesOfCodeDeleted[index]), // add the current value that is being used for the offset to the lines of code added to make up for the offset
         type: 'bar',
         name: 'Request End Date',
         width: 86400000 * 9,
@@ -175,7 +175,8 @@ export class PlotlyService {
         marker: {
           color: barColors
         },
-        showlegend: false
+        showlegend: false,
+        base: linesOfCodeDeleted.map((value, index) => -value)  // Use the negative values as the base
       };
 
       var trace2 = {
@@ -204,6 +205,10 @@ export class PlotlyService {
 
       console.log(this.getBarColors(4))
     });
+  }
+
+  test(testNumb: number): number {
+    return testNumb;
   }
   getBarColors(numberOfBars: number): string[] {
     const colors: string[] = [];
