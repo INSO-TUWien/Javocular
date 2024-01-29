@@ -118,15 +118,20 @@ export class PlotlyService {
   }
 
 
-  plotHistMR(title: string, plotDiv: string, excMerges: string[]) {
+  plotHistMR(title: string, plotDiv: string, excMerges: string[], startDate: string, endDate: string) {
     this.dataService.getHistogramData().subscribe(data => {
       var mergeRequestNames = Object.keys(data);
       let filteredMerges: string[] = [];
 
-      for (let mr in data) {
-        if (data.hasOwnProperty(mr) && !excMerges.includes(mr)) {
-          filteredMerges.push(mr.toString());
-          console.log(mr);
+      for (let mrName in data) {
+        if (data.hasOwnProperty(mrName) && !excMerges.includes(mrName)) {
+          const mr = data[mrName];
+          if ((mr["startDate"] >= startDate && mr["endDate"] <= endDate) ||
+              (startDate.length == 0 && endDate.length == 0) ||
+              (startDate.length == 0 && mr["endDate"] <= endDate) ||
+              (endDate.length == 0 && mr["startDate"] >= startDate)) {
+            filteredMerges.push(mrName);
+          }
         }
       }
 

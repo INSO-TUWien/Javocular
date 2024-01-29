@@ -11,6 +11,8 @@ export class HistogramMrComponent implements OnInit{
   mergeRequestNames: string[] = [];
   searchText: string = '';
   public checkedMerges: boolean[] = [];
+  startDate: string = '';
+  endDate: string = '';
   constructor(private plot:PlotlyService) {  }
 
   ngOnInit() {
@@ -23,7 +25,7 @@ export class HistogramMrComponent implements OnInit{
     document.getElementById("noDiagGen")!.style.display = "none";
     document.getElementById("plot")!.style.borderStyle = "none";
 
-    this.plot.plotHistMR("lol", "plot", execMerges);
+    this.plot.plotHistMR("lol", "plot", execMerges, this.startDate, this.endDate);
   }
 
   toggleCheckbox(index: number) {
