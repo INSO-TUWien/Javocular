@@ -29,7 +29,7 @@ public class JSONObjectList {
         HashMap<String, Object> propertyNames = new HashMap<>();
 
         for(var property : properties) {
-            propertyNames.put(property, 0);
+            propertyNames.put(property, 0L);
         }
 
         objects.add(new JSONObject(type, propertyNames));

@@ -7,7 +7,7 @@ public class Issue {
     @JsonProperty
     public String id;
     @JsonProperty
-    public int iid;
+    public long iid;
     @JsonProperty
     public String title;
     @JsonProperty
