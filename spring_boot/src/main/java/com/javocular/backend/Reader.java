@@ -1,10 +1,7 @@
 package com.javocular.backend;
 
-import com.arangodb.entity.BaseDocument;
 import com.arangodb.*;
-import com.arangodb.util.RawJson;
-import com.fasterxml.jackson.databind.ser.Serializers;
-import com.javocular.backend.models.Commit;
+import com.javocular.backend.IModel.Commit;
 
 import java.util.List;
 import java.util.ArrayList;

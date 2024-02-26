@@ -1,11 +1,9 @@
 package com.javocular.backend;
 
 import com.arangodb.ArangoCursor;
-import com.arangodb.entity.BaseDocument;
-import com.javocular.backend.models.Commit;
+import com.javocular.backend.IModel.Commit;
 
 import java.util.*;
-import java.util.HashMap;
 
 public class RequestImplement implements Requests{
 
@@ -44,7 +42,7 @@ public class RequestImplement implements Requests{
                         }
                         break;
                     */
-                    case "issues":
+                    /*case "issues":
                         var between = (LinkedHashMap)cursor.next().getAttribute("assignee");
 
                         if (between == null) break;
@@ -55,12 +53,12 @@ public class RequestImplement implements Requests{
                             if(cimrs.find(author) == null) {
                                 cimrs.add(author, tables);
                             }
-                            int value = (int) cimrs.get(author).getObjectContent().get("issues");
+                            long value = (long) cimrs.get(author).getObjectContent().get("issues");
                             cimrs.get(author).getObjectContent().replace("issues", value, value + 1);
 
                         }
                         break;
-
+                    */
                     case "commits":
                         author = cursor.next().signature;
 
@@ -68,7 +66,7 @@ public class RequestImplement implements Requests{
                             if(cimrs.find(author) == null) {
                                 cimrs.add(author, tables);
                             }
-                            int value = (int) cimrs.get(author).getObjectContent().get("commits");
+                            long value = (long) cimrs.get(author).getObjectContent().get("commits");
                             cimrs.get(author).getObjectContent().replace("commits", value, value + 1);
 
                         }

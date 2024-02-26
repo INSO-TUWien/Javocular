@@ -1,7 +1,6 @@
-package com.javocular.backend.models;
+package com.javocular.backend.IModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 public class Commit {
     @JsonProperty

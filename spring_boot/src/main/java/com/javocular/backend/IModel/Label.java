@@ -1,10 +1,10 @@
-package com.javocular.backend.models;
+package com.javocular.backend.IModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Label {
     @JsonProperty
-    public int id;
+    public long id;
     @JsonProperty
     public String node_id;
     @JsonProperty
