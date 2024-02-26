@@ -212,9 +212,6 @@ export class PlotlyService {
     });
   }
 
-  test(testNumb: number): number {
-    return testNumb;
-  }
   getBarColors(numberOfBars: number): string[] {
     const colors: string[] = [];
     const saturation: number = 0.8; // You can adjust the saturation and value as needed
