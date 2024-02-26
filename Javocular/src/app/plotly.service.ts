@@ -25,6 +25,22 @@ export class PlotlyService {
     return authors;
   }
 
+  getAuthorNamesAPI() {
+    let authors: string[] = [];
+    this.dataService.getAuthorsCIMRAPI().subscribe(data => {
+
+      console.log('Authors data:', data);
+
+      // Assuming data is an object with properties corresponding to authors
+      for (let author in data) {
+        if (data.hasOwnProperty(author)) {
+          authors.push(author);
+        }
+      }
+    });
+    return authors;
+  }
+
   getMergeRequestNames() {
     let mergeRequests: string[] = [];
     this.dataService.getHistogramData().subscribe(data => {
@@ -35,11 +51,72 @@ export class PlotlyService {
     return mergeRequests;
   }
 
+
+
   plotCIMRJson(title: string, plotDiv: string, tables: string[], excAuthors: string[]) {
     let authors: string[] = this.getAuthorNames();
     let filteredAuthors: string[] = [];
 
     this.dataService.getAuthorsCIMR().subscribe(data => {
+      let values: number[][] = [];
+
+      // Assuming data is an object with properties corresponding to authors
+      for (let author in data) {
+        if (data.hasOwnProperty(author) && !excAuthors.includes(author)) {
+          values.push(Object.values(data[author]));
+          filteredAuthors.push(author.toString());
+          console.log(author);
+        }
+      }
+
+      let traceCom = {
+        x: values.map(authorValues => authorValues[0]),
+        y: filteredAuthors,
+        type: 'bar',
+        orientation: "h",
+        name: "commits"
+      };
+      let traceIss = {
+        x: values.map(authorValues => authorValues[1]),
+        y: filteredAuthors,
+        type: 'bar',
+        orientation: "h",
+        name: "issues"
+      };
+      let traceMergR = {
+        x: values.map(authorValues => authorValues[2]),
+        y: filteredAuthors,
+        type: 'bar',
+        orientation: "h",
+        name: "merge requests"
+      };
+
+      let traces: any[] = [];
+
+      if (tables.includes("commits")) {
+        traces.push(traceCom);
+      }
+      if (tables.includes("issues")) {
+        traces.push(traceIss);
+      }
+      if (tables.includes("mergeRequests")) {
+        traces.push(traceMergR);
+      }
+
+      let layout = {
+        title: title,
+        barmode: "stack"
+      };
+
+      Plotly.newPlot(plotDiv, traces, layout);
+    });
+  }
+
+  plotCIMRJsonAPI(title: string, plotDiv: string, tables: string[], excAuthors: string[]) {
+    let authors: string[] = this.getAuthorNamesAPI();
+    let filteredAuthors: string[] = [];
+
+    this.dataService.getAuthorsCIMRAPI().subscribe(data => {
       let values: number[][] = [];
 
       // Assuming data is an object with properties corresponding to authors

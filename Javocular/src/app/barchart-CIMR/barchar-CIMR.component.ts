@@ -69,7 +69,7 @@ export class BarcharCIMRComponent implements OnInit{
   }
 
   getAuthorNames() {
-    return this.plot.getAuthorNames();
+    return this.plot.getAuthorNamesAPI();
   }
 
   getCheckedTables() {
@@ -97,7 +97,7 @@ export class BarcharCIMRComponent implements OnInit{
     let radioNone = <HTMLInputElement> document.getElementById("btnradioNone")!;
     radioNone.checked = true;
 
-    this.plot.plotCIMRJson("CIMR - Diagram","plot", tables, excAuthors);
+    this.plot.plotCIMRJsonAPI("CIMR - Diagram","plot", tables, excAuthors);
   }
 
   groupCIMR(table: string) {
