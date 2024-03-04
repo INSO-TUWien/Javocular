@@ -14,6 +14,8 @@ public class JSONObjectList {
     // returns first hit
     public JSONObject find(String objectType) {
 
+        if(objectType == null) return null;
+
         for(var object : objects) {
             if(object.getObjectType().equals(objectType)) return object;
         }

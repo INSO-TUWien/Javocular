@@ -2,6 +2,7 @@ package com.javocular.backend;
 
 import com.arangodb.*;
 import com.javocular.backend.IModel.Commit;
+import com.javocular.backend.IModel.Issue;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -20,11 +21,20 @@ public class Reader{
         connector = connection;
     }
 
-    public ArangoCursor<Commit> QueryResult(String query) {
+    public ArangoCursor<Commit> QueryResultCommit(String query) {
 
         if(arangodb == null) return null;
         List<String> result = new ArrayList<>();
         ArangoCursor<Commit> cursor = arangodb.db(connector).query(query, Commit.class, null, null);
+        // while(cursor.hasNext()) result.add(cursor.next().toString());
+        return cursor;
+    }
+
+    public ArangoCursor<Issue> QueryResultIssue(String query) {
+
+        if(arangodb == null) return null;
+        List<String> result = new ArrayList<>();
+        ArangoCursor<Issue> cursor = arangodb.db(connector).query(query, Issue.class, null, null);
         // while(cursor.hasNext()) result.add(cursor.next().toString());
         return cursor;
     }

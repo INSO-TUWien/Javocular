@@ -26,4 +26,14 @@ public class Issue {
     public Label[] labels;
     @JsonProperty
     public String milestone;
+    @JsonProperty
+    public Author author;
+    @JsonProperty
+    public Author assignee;
+    @JsonProperty
+    public Author[] assignees;
+    @JsonProperty
+    public String webUrl;
+    @JsonProperty
+    public Mention[] mentions;
 }
