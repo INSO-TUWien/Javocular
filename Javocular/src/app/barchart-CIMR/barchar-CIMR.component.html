@@ -7,39 +7,6 @@
         </button>
         <div id="filterContent" style="display: none; font-weight: bold;" class="border border-secondary">
           <input type="text" class="form-control" placeholder="Search Authors" [(ngModel)]="searchText" />
-          <!--<div class="form-check">
-            <input
-              class="form-check-input border border-secondary"
-              type="checkbox"
-              id="checkboxCommits"
-              checked
-            />
-            <label class="form-check-label" for="checkboxCommits">
-              Commits
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input border border-secondary"
-              type="checkbox"
-              id="checkboxIssues"
-              checked
-            />
-            <label class="form-check-label" for="checkboxIssues">
-              Issues
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input border border-secondary"
-              type="checkbox"
-              id="checkboxMergeRequests"
-              checked
-            />
-            <label class="form-check-label" for="checkboxMergeRequests">
-              Merge Requests
-            </label>
-          </div>-->
           <div style="max-height: 150px; overflow-y: auto;">
             <div *ngFor="let author of filteredAuthors; let i = index" class="form-check">
               <input
@@ -51,7 +18,7 @@
                 (change)="toggleCheckbox(i)"
               />
               <label class="form-check-label" [for]="'authorCheck' + i">
-                {{ author }}
+                {{ author }} &nbsp;
               </label>
             </div>
           </div>

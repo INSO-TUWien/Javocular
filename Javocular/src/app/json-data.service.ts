@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JsonDataService {
-  private jsonUrlCIMR = 'assets/BarChartTestData.json'; // adjust the path based on your project structure
-  private jsonUrlCIMRAPI = 'http://localhost:8080';
-  private histogramJsonUrl = 'assets/HistogramTestData.json'; // adjust the path based on your project structure
+  private jsonUrlCIMR = 'assets/BarChartTestData.json';
+  private jsonUrlCIMRAPI = 'http://localhost:8080/api/database/cimr';
+  private histogramJsonUrl = 'assets/HistogramTestData.json';
   constructor(private http: HttpClient) {}
 
   getAuthorsCIMR(): Observable<any> {

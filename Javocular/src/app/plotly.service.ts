@@ -149,11 +149,55 @@ export class PlotlyService {
         title: title,
         barmode: "stack",
         yaxis: {
-          automargin: true
-        }
+          automargin: true,
+          tickmode: "array",
+          tickvals: filteredAuthors.map((author, index) => index), // Set tick values to evenly spaced indices
+          ticktext: filteredAuthors.map(author => author + " "), // Add a space at the end of each author label
+          // Set the initial font size for y-axis labels
+          tickfont: {
+            size: 8 // Initial font size (you can adjust this value)
+          }
+        },
+        bargap: 0.5 // Adjust the gap between bars here (0.1 means 10% of the bar width)
       };
 
       Plotly.newPlot(plotDiv, traces, layout);
+
+      let test = document.getElementById("plot") as any;
+
+
+
+      // Listen for the relayout event to dynamically adjust font size based on zoom level
+      test.on('plotly_relayout', (eventData: any) => {
+        console.log('Relayout event data:', eventData);
+        if (eventData['yaxis.range[0]'] !== undefined || eventData['yaxis.autorange'] !== undefined) {
+          let authorsCount = eventData['yaxis.range[1]'] - eventData['yaxis.range[0]']; // Assuming y-axis represents authors
+          // Adjust font size based on the number of authors
+          let fontSize;
+          switch (true) {
+            case authorsCount < 10:
+              fontSize = 14;
+              break;
+            case authorsCount < 20:
+              fontSize = 12;
+              break;
+            default:
+              fontSize = 10; // Default font size
+          }
+          Plotly.relayout(plotDiv, {'yaxis.tickfont.size': fontSize});
+        }
+      });
+
+      // Listen for double-click event to reset the plot
+      test.on('plotly_doubleclick', () => {
+        // Reset plot to its original state
+        Plotly.relayout(plotDiv, {
+          'xaxis.autorange': true,
+          'yaxis.autorange': true,
+          'yaxis.tickfont.size': 8 // Reset font size to default
+        });
+      });
+
     });
   }
 
