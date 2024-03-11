@@ -8,18 +8,22 @@ import { PlotlyService } from '../plotly.service';
 })
 export class BarcharCIMRComponent implements OnInit{
   constructor(private plot:PlotlyService) { }
-  public authors!: string[];
+  public authors: string[] = [];
   public checkedAuthors: boolean[] = [];
   searchText: string = '';
   ngOnInit(): void {
-    // let x:number[][] = [[43, 64, 32], [10, 15, 14], [5, 8, 10]];
-    // let authors:string[] = ["Author 1", "Author 2", "Author 3"];
-    this.authors = this.getAuthorNames();
+    this.getAuthorNames().subscribe(data => {
 
-    // Initialize checkedAuthors array with all checkboxes initially checked
-    this.checkedAuthors = new Array(this.authors.length).fill(true);
+      console.log('Authors data:', data);
 
-    this.selectAll();
+      // Assuming data is an object with properties corresponding to authors
+      for (let author in data) {
+        if (data.hasOwnProperty(author)) {
+          this.authors.push(author);
+        }
+      }
+      this.selectAll();
+    });
   }
 
   toggleCheckbox(index: number) {
@@ -39,24 +43,10 @@ export class BarcharCIMRComponent implements OnInit{
 
   selectAll() {
     this.checkedAuthors = new Array(this.authors.length).fill(true);
-
-    let commits = <HTMLInputElement> document.getElementById("checkboxCommits");
-    let issues = <HTMLInputElement> document.getElementById("checkboxIssues");
-    let mergeRequests = <HTMLInputElement> document.getElementById("checkboxMergeRequests");
-    commits.checked = true;
-    issues.checked = true;
-    mergeRequests.checked = true;
   }
 
   unselectAll() {
     this.checkedAuthors = new Array(this.authors.length).fill(false);
-
-    let commits = <HTMLInputElement> document.getElementById("checkboxCommits");
-    let issues = <HTMLInputElement> document.getElementById("checkboxIssues");
-    let mergeRequests = <HTMLInputElement> document.getElementById("checkboxMergeRequests");
-    commits.checked = false;
-    issues.checked = false;
-    mergeRequests.checked = false;
   }
 
   changeDisplayFilter(id: string) {
@@ -72,36 +62,18 @@ export class BarcharCIMRComponent implements OnInit{
     return this.plot.getAuthorNamesAPI();
   }
 
-  getCheckedTables() {
-    let commits = <HTMLInputElement> document.getElementById("checkboxCommits");
-    let issues = <HTMLInputElement> document.getElementById("checkboxIssues");
-    let mergeRequests = <HTMLInputElement> document.getElementById("checkboxMergeRequests");
-    let tables: string[] = [];
-    if (commits.checked) {
-      tables.push("commits");
-    }
-    if (issues.checked) {
-      tables.push("issues");
-    }
-    if (mergeRequests.checked) {
-      tables.push("mergeRequests");
-    }
-
-    return tables;
-  }
-
-  plotCIMRJson(tables: string[], excAuthors: string[]) {
+  plotCIMRJson(excAuthors: string[]) {
     // remove text and border that is displayed when a diagram is not generated yet
     document.getElementById("noDiagGen")!.style.display = "none";
     document.getElementById("plot")!.style.borderStyle = "none";
     let radioNone = <HTMLInputElement> document.getElementById("btnradioNone")!;
     radioNone.checked = true;
 
-    this.plot.plotCIMRJsonAPI("CIMR - Diagram","plot", tables, excAuthors);
+    this.plot.plotCIMRJsonAPI("CIMR - Diagram","plot", excAuthors);
   }
 
   groupCIMR(table: string) {
     let title = "CIMR - " + table + " Grouping";
     this.plot.groupCIMR(title, table, "plot");
-}
+  }
 }

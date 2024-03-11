@@ -7,6 +7,7 @@ declare let Plotly: any;
   providedIn: 'root'
 })
 export class PlotlyService {
+  private authors: string[] = [];
   constructor(private dataService: JsonDataService) { }
 
   getAuthorNames() {
@@ -26,19 +27,8 @@ export class PlotlyService {
   }
 
   getAuthorNamesAPI() {
-    let authors: string[] = [];
-    this.dataService.getAuthorsCIMRAPI().subscribe(data => {
-
-      console.log('Authors data:', data);
-
-      // Assuming data is an object with properties corresponding to authors
-      for (let author in data) {
-        if (data.hasOwnProperty(author)) {
-          authors.push(author);
-        }
-      }
-    });
-    return authors;
+    return this.dataService.getAuthorsCIMRAPI();
+    //return authors;
   }
 
   getMergeRequestNames() {
@@ -112,8 +102,8 @@ export class PlotlyService {
     });
   }
 
-  plotCIMRJsonAPI(title: string, plotDiv: string, tables: string[], excAuthors: string[]) {
-    let authors: string[] = this.getAuthorNamesAPI();
+  plotCIMRJsonAPI(title: string, plotDiv: string, excAuthors: string[]) {
+    let authors: string[] = this.getAuthorNames();
     let filteredAuthors: string[] = [];
 
     this.dataService.getAuthorsCIMRAPI().subscribe(data => {
@@ -151,20 +141,16 @@ export class PlotlyService {
       };
 
       let traces: any[] = [];
-
-      if (tables.includes("commits")) {
-        traces.push(traceCom);
-      }
-      if (tables.includes("issues")) {
-        traces.push(traceIss);
-      }
-      if (tables.includes("mergeRequests")) {
-        traces.push(traceMergR);
-      }
+      traces.push(traceCom);
+      traces.push(traceIss);
+      traces.push(traceMergR);
 
       let layout = {
         title: title,
-        barmode: "stack"
+        barmode: "stack",
+        yaxis: {
+          automargin: true
+        }
       };
 
       Plotly.newPlot(plotDiv, traces, layout);
