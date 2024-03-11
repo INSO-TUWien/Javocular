@@ -7,19 +7,21 @@ import com.javocular.backend.IModel.Issue;
 import java.util.*;
 
 import com.javocular.backend.HelperFunctions;
+import com.javocular.backend.OModel.CIMROutput;
+import com.javocular.backend.OModel.CIMRStats;
 
 public class RequestImplement implements Requests{
 
     private final Reader read = new Reader();
 
     @Override
-    public JSONObjectList CIMRDiagram(String[] tables, List<String> exlAuths) {
+    public CIMROutput CIMRDiagram(String[] tables, List<String> exlAuths) {
 
         //set database connection to binocular database
         read.reset("binocular-Binocular");
 
         // each author is its own entry, and their contributions in each table is a dedicated entry in the int[]
-        JSONObjectList cimrs = new JSONObjectList();
+        CIMROutput cimrOutput = new CIMROutput();
 
 
             ArangoCursor<Commit> commits = null;
@@ -30,38 +32,36 @@ public class RequestImplement implements Requests{
         if (Arrays.stream(tables).toList().contains("issues"))
             issues = read.QueryResultIssue("FOR t IN issues RETURN t");
 
-            while(commits != null && commits.hasNext()) {
-                String author = "";
-                    /*
-                    case "mergeRequests":
-                        author = ((BaseDocument) cursor.next().getAttribute("assignees")).getAttribute("login").toString();
-                        if (!exlAuths.contains(author)) {
-                            if(cimrs.find(author) == null) {
-                                cimrs.add(author, propertyNames);
-                            }
-                            cimrs.get(author).getObjectContent().replace("mergeRequests", cimrs.get(author).getObjectContent().get("mergeRequests"), (int)cimrs.get(author).getObjectContent().get("mergeRequests")++);
-
-                            if(!cimrs.contains()) {
-                                cimrs.put(author, new int[3]);
-                            }
-                            cimrs.get(author)[2]++;
+        while(commits != null && commits.hasNext()) {
+            String author = "";
+            /*
+                case "mergeRequests":
+                    author = ((BaseDocument) cursor.next().getAttribute("assignees")).getAttribute("login").toString();
+                    if (!exlAuths.contains(author)) {
+                        if(cimrs.find(author) == null) {
+                            cimrs.add(author, propertyNames);
                         }
-                        break;
-                    */
+                    cimrs.get(author).getObjectContent().replace("mergeRequests", cimrs.get(author).getObjectContent().get("mergeRequests"), (int)cimrs.get(author).getObjectContent().get("mergeRequests")++);
+                    if(!cimrs.contains()) {
+                        cimrs.put(author, new int[3]);
+                    }
+                    cimrs.get(author)[2]++;
+                    }
+                break;
+            */
                 author = HelperFunctions.replaceUmlauts(HelperFunctions.stripEmail(commits.next().signature));
 
                 if (!exlAuths.contains(author)) {
-                    if(cimrs.find(author) == null) {
-                        cimrs.add(author, tables);
+                    if(cimrOutput.find(author) == null) {
+                        cimrOutput.add(author);
                     }
-                    long value = (long) cimrs.get(author).getObjectContent().get("commits");
-                    cimrs.get(author).getObjectContent().replace("commits", value, value + 1);
+                    cimrOutput.find(author).cimrStats.commits++;
                 }
 
 
             }
 
-            while (issues != null && issues.hasNext()){
+            while (issues != null && issues.hasNext()) {
                 var assignee = issues.next().assignee;
 
                 if (assignee != null && (assignee.name != null || assignee.login != null)) {
@@ -70,24 +70,22 @@ public class RequestImplement implements Requests{
 
                     if (!exlAuths.contains(author)) {
                         if (author == null) {
-                            if (cimrs.find(login) == null)
-                                cimrs.add(login, tables);
-                            long value = (long) cimrs.get(login).getObjectContent().get("issues");
-                            cimrs.get(login).getObjectContent().replace("issues", value, value + 1);
+                            if (cimrOutput.find(login) == null)
+                                cimrOutput.add(login);
+                            cimrOutput.find(login).cimrStats.issues++;
                         }
                         else {
-                            if (cimrs.find(author) == null) {
+                            if (cimrOutput.find(author) == null) {
                                 if (login != null) author += " Login: " + login;
-                                cimrs.add(author, tables);
+                                cimrOutput.add(author);
                             }
-                            long value = (long) cimrs.get(author).getObjectContent().get("issues");
-                            cimrs.get(author).getObjectContent().replace("issues", value, value + 1);
+                            cimrOutput.find(author).cimrStats.issues++;
                         }
                     }
                 }
             }
 
-        return cimrs;
+        return cimrOutput;
     }
 
 }
